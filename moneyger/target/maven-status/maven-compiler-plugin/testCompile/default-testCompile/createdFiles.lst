@@ -1,0 +1,4 @@
+com\example\expenditure\ExpenditureHandlerTest.class
+com\example\MessageHandlerTest.class
+com\example\expenditure\R2dbcExpenditureRepositoryTest.class
+com\example\HelloHandlerTest.class
