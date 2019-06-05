@@ -1,4 +1,5 @@
 package com.example.sandbox.foo;
 
-public interface fooInterface {
+public interface FooInterface {
+	void println(String s);
 }
