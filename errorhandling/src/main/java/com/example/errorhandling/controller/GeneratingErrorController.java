@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @RestController
-public class ErrorGenerateController {
+public class GeneratingErrorController {
 
 	@GetMapping("/hello")
 	public void error() {
@@ -16,7 +16,7 @@ public class ErrorGenerateController {
 
 	@GetMapping("/helloNoHandler")
 	public void errorMissingServletRequestParameterException() throws Exception {
-		throw new NoHandlerFoundException("test", "/helloNoHandler", new HttpHeaders());
+		throw new NoHandlerFoundException("hello", "/helloNoHandler", new HttpHeaders());
 	}
 
 }
