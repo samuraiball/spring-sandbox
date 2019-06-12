@@ -1,7 +1,6 @@
 package com.example.kafkasample;
 
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,5 +10,4 @@ public class MyKafkaListener {
 	public void processMessage(String content) {
 		System.out.println("content = " + content);
 	}
-
 }
