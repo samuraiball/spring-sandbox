@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+</head>
+<body>
+<form action="/upload" th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    ファイル：<input type="file" name="upload_file">
+    <button type="submit"></button>
+</form>
+</body>
+</html>
