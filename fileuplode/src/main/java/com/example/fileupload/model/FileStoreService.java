@@ -3,7 +3,7 @@ package com.example.fileupload.model;
 import com.example.fileupload.model.eintity.UploadedFile;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class FileStoreService {
@@ -20,6 +20,10 @@ public class FileStoreService {
 
 	public UploadedFile findById(String fileId) {
 		return fileDao.findById(fileId);
+	}
+
+	public List<UploadedFile> findAllFileList(){
+		return fileDao.findAllFileList();
 	}
 
 }

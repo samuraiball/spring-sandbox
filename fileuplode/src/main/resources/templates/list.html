@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<h1>File list</h1>
+<ul th:each="file : ${fileList}">
+    <li><a th:href="@{'/file/' + ${file.fileId}}"><p th:text="${file.fileName}"></p></a></li>
+</ul>
+</body>
+</html>

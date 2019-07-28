@@ -4,9 +4,9 @@ import com.example.fileupload.model.eintity.UploadedFile;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
-import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
-import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Dao
 @ConfigAutowireable
@@ -16,4 +16,7 @@ public interface FileDao {
 
 	@Select
 	UploadedFile findById(String fileId);
+
+	@Select
+	List<UploadedFile> findAllFileList();
 }
