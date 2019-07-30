@@ -3,6 +3,8 @@ package com.example.fileupload.controller;
 import com.example.fileupload.model.FileStoreService;
 import com.example.fileupload.model.eintity.UploadedFile;
 import com.example.fileupload.model.eintity.UploadedFileBuilder;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @Controller
@@ -28,8 +32,7 @@ public class FileController {
 
 	@GetMapping("/")
 	public String start() {
-		//TODO: create Main page
-		return "";
+		return "index";
 	}
 
 	@GetMapping("/list")
@@ -38,16 +41,23 @@ public class FileController {
 		return "/list";
 	}
 
+
 	@GetMapping("/file/{fileId:[0-9]*}")
-	public ResponseEntity<InputStream> file(@PathVariable String fileId) {
-		//TODO: download file
-//		UploadedFile uploadedFile = fileStoreService.findById(fileId);
-//		return ResponseEntity.ok()
-//				.header(HttpHeaders.CONTENT_TYPE, uploadedFile.getMimeType())
-//				.header(HttpHeaders.CONTENT_DISPOSITION,
-//						"attachment; filename=\"" + uploadedFile.getFileName() + "\"")
-//				.body();
-		return null;
+	@ResponseBody
+	public ResponseEntity<byte[]> file(@PathVariable String fileId) {
+		UploadedFile uploadedFile = fileStoreService.findById(fileId);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", uploadedFile.getMimeType());
+		headers.add("Content-Disposition",
+				"attachment; filename=" +
+						URLEncoder.encode(uploadedFile.getFileName(), StandardCharsets.UTF_8));
+		return new ResponseEntity(uploadedFile.getFileBody(), headers, HttpStatus.OK);
+	}
+
+	@GetMapping("/uploadForm")
+	public String startUpload(Model model) {
+		return "upload";
 	}
 
 	@PostMapping("/upload")
