@@ -9,5 +9,6 @@
 <ul th:each="file : ${fileList}">
     <li><a th:href="@{'/file/' + ${file.fileId}}"><p th:text="${file.fileName}"></p></a></li>
 </ul>
+<div><a href="/">Topへ戻る</a></div>
 </body>
 </html>
