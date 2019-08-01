@@ -78,8 +78,6 @@ public class FileController {
 						.withMimeType(multipartFile.getContentType())
 						.createUploadedFile());
 
-		UploadedFile uploadedFile = fileStoreService.findById("0");
-		System.out.println(new String(uploadedFile.getFileBody(), StandardCharsets.UTF_8));
 		return "redirect:/complete";
 	}
 
