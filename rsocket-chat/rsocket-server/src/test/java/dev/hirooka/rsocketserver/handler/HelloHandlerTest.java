@@ -22,10 +22,13 @@ class HelloHandlerTest {
 
     @Test
     void hello() {
-        final Mono<String> response =requester.route("hello").retrieveMono(String.class);
+        final Mono<String> response = requester
+                .route("hello")
+                .data("message")
+                .retrieveMono(String.class);
 
         StepVerifier.create(response)
-                .expectNext("hello")
+                .expectNext("Hello message!!")
                 .expectComplete()
                 .verify();
     }
