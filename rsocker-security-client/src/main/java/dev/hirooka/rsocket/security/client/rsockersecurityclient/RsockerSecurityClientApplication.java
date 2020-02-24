@@ -26,8 +26,11 @@ public class RsockerSecurityClientApplication {
 
     private final MimeType mimeType =
             MimeTypeUtils.parseMimeType(WellKnownMimeType.MESSAGE_RSOCKET_AUTHENTICATION.getString());
-    private final UsernamePasswordMetadata credentials =
+    private final UsernamePasswordMetadata credentialsMohezi =
             new UsernamePasswordMetadata("mohezi", "pw");
+
+    private final UsernamePasswordMetadata credentialsHeno =
+            new UsernamePasswordMetadata("heno", "pw");
 
     @SneakyThrows
     public static void main(String[] args) {
@@ -43,7 +46,7 @@ public class RsockerSecurityClientApplication {
     @Bean
     RSocketRequester rSocketRequester(RSocketRequester.Builder builder) {
         return builder
-                .setupMetadata(this.credentials, this.mimeType)
+                .setupMetadata(this.credentialsMohezi, this.mimeType)
                 .connectTcp("localhost", 8080)
                 .block();
     }
@@ -53,13 +56,14 @@ public class RsockerSecurityClientApplication {
         return event -> {
             requester
                     .route("greetings")
-                    .metadata(this.credentials, this.mimeType)
+                    .metadata(this.credentialsHeno, this.mimeType)
                     .data(Mono.empty())
                     .retrieveFlux(GreetingResponse.class)
                     .subscribe(gr -> log.info("secured response" + gr.getMessage()));
         };
     }
 }
+
 
 @Data
 @AllArgsConstructor
