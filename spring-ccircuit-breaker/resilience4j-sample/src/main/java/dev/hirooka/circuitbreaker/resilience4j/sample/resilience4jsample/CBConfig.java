@@ -27,9 +27,9 @@ public class CBConfig {
                 .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(5)).build())
                 .circuitBreakerConfig(
                         CircuitBreakerConfig.custom()
-                                .failureRateThreshold(90)
+                                .failureRateThreshold(30)
                                 .slidingWindowSize(5)
-                                .minimumNumberOfCalls(0)
+                                .minimumNumberOfCalls(1)
                                 .waitDurationInOpenState(Duration.ofSeconds(30))
                                 .build()
                 ).build()
