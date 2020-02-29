@@ -24,13 +24,15 @@ public class CBConfig {
     @Bean
     public Customizer<Resilience4JCircuitBreakerFactory> defaultCustomizer() {
         return factory -> factory.configureDefault(id -> new Resilience4JConfigBuilder(id)
-                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(3)).build())
-                .circuitBreakerConfig(CircuitBreakerConfig
-                        .custom()
-                        .slowCallDurationThreshold(Duration.ofSeconds(3))
-                        .waitDurationInOpenState(Duration.ofSeconds(10000))
-                        .build())
-                .build()
+                .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(5)).build())
+                .circuitBreakerConfig(
+                        CircuitBreakerConfig.custom()
+                                .failureRateThreshold(90)
+                                .slidingWindowSize(5)
+                                .minimumNumberOfCalls(0)
+                                .waitDurationInOpenState(Duration.ofSeconds(30))
+                                .build()
+                ).build()
         );
     }
 }

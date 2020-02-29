@@ -24,7 +24,6 @@ public class CBController {
         this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
-
     @GetMapping("/delay/{second}")
     public Map greeting(@PathVariable int second) {
         return circuitBreakerFactory
