@@ -1,0 +1,10 @@
+request:
+  method: GET
+  url: /hello
+  matchers:
+response:
+  status: 200
+  body:
+    "hello": "world"
+  headers:
+    Content-Type: application/json
