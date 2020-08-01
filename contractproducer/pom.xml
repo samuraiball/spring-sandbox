@@ -64,7 +64,6 @@
                 <extensions>true</extensions>
                 <configuration>
                     <testFramework>JUNIT5</testFramework>
-                    <!--ここを追記する-->
                     <baseClassForTests>dev.hirooka.contractproducer.ContractTestBase</baseClassForTests>
                 </configuration>
             </plugin>

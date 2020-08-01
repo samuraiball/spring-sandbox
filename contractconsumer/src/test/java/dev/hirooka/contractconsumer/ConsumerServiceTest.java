@@ -15,13 +15,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 )
 public class ConsumerServiceTest {
 
-
     @Autowired
     private ConsumerService consumerService;
 
     @Test
     void consumerTest() {
         Hello hello = consumerService.getHello();
-        assertThat(hello.getHello()).isEqualTo("world");
+        String actual = hello.getHello();
+        assertThat(actual).isEqualTo("world");
     }
 }
+
+
