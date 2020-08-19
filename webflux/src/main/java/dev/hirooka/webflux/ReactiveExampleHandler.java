@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 
 @Component
-public class ExampleHandler {
+public class ReactiveExampleHandler {
 
     public Mono<ServerResponse> hello(ServerRequest serverRequest) {
         return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN).body(BodyInserters.fromValue("hello"));
@@ -21,8 +21,11 @@ public class ExampleHandler {
         return ServerResponse.ok().body(Flux.just(new Employee("henoheno"), new Employee("moheji")), Employee.class);
     }
 
+//    Stream<Integer> stream = Stream.iterate(0, i -> i + 1); // Java8の無限Stream
+//    Flux<Map<String, Integer>> value = Flux.fromStream(stream.limit(10))
+//            .map(i -> Collections.singletonMap("value", i));
 
     public Mono<ServerResponse> getIntervalNum(ServerRequest serverRequest) {
-        return ServerResponse.ok().body(Flux.interval(Duration.ofSeconds(3)).take(3), Employee.class);
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_STREAM_JSON).body(Flux.interval(Duration.ofSeconds(3)).take(3), Long.class);
     }
 }

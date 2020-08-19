@@ -3,6 +3,7 @@ package dev.hirooka.webflux;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.server.*;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
@@ -15,9 +16,14 @@ public class WebfluxApplication {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> route(ExampleHandler exampleHandler) {
-        return RouterFunctions.route(GET("employees"), exampleHandler::getEmployee);
-                //route(GET("/hello"), exampleHandler::getEmploy)
-                //.andRoute(GET("/intervalNum"), exampleHandler::getIntervalNum);
+    public RouterFunction<ServerResponse> route(ReactiveExampleHandler reactiveExampleHandler) {
+        return RouterFunctions.route(GET("employees"), reactiveExampleHandler::getEmployee)
+                .andRoute(GET("/intervalNum"), reactiveExampleHandler::getIntervalNum)
+                .andRoute(GET("/hello"), reactiveExampleHandler::hello);
+    }
+
+    @Bean
+    public  WebClient webClient(WebClient.Builder builder){
+        return builder.build();
     }
 }
