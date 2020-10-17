@@ -42,7 +42,7 @@ public class GlobalErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
             Map<String, Object> ea = getErrorAttributes(r,
                     eao.including(ErrorAttributeOptions.Include.EXCEPTION, ErrorAttributeOptions.Include.MESSAGE)
             );
-            logger.warn(ea.toString());
+            logger.warn("{}", ea);
             return renderJsonResponse(ea);
         });
     }
