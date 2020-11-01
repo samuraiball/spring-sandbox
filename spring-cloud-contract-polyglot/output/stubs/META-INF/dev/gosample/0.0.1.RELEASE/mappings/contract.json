@@ -1,0 +1,13 @@
+{
+  "id" : "88205fa7-04e7-4845-9ba5-4ba057d8042e",
+  "request" : {
+    "url" : "/hello",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "body" : "{\"hello\":\"world\"}",
+    "transformers" : [ "response-template" ]
+  },
+  "uuid" : "88205fa7-04e7-4845-9ba5-4ba057d8042e"
+}
