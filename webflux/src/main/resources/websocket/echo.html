@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket-example</title>
+</head>
+<body>
+
+<a href="#" id="close">Close Session</a>
+<div id="messages">aaaaaaa</div>
+
+<script>
+
+    let websocket = null;
+
+    function log(msg) {
+        const messageDiv = document.getElementById('messages')
+        const elem = document.createElement('div')
+        const txt = document.createTextNode(msg)
+        elem.appendChild(txt)
+        messageDiv.appendChild(elem)
+    }
+
+    window.addEventListener('load', function (e) {
+        echo = new WebSocket('ws://localhost:8080/ws/echo')
+        echo.addEventListener('message', function (e) {
+            const msg = e.data
+            log(msg)
+            echo.send(msg + ' reply')
+        })
+    })
+
+    document.getElementById('close')
+        .addEventListener('click', function (e) {
+            e.preventDefault()
+            echo.close()
+            return false
+        })
+</script>
+
+
+</body>
+</html>

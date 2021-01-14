@@ -1,4 +1,4 @@
-package dev.hirooka.webflux;
+package dev.hirooka.webflux.http;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package dev.hirooka.webflux;
+package dev.hirooka.webflux.http;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -26,6 +26,6 @@ public class ReactiveExampleHandler {
 //            .map(i -> Collections.singletonMap("value", i));
 
     public Mono<ServerResponse> getIntervalNum(ServerRequest serverRequest) {
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_STREAM_JSON).body(Flux.interval(Duration.ofSeconds(3)).take(3), Long.class);
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_NDJSON).body(Flux.interval(Duration.ofSeconds(1)).take(3), Long.class);
     }
 }

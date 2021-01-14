@@ -1,4 +1,4 @@
-package dev.hirooka.webflux;
+package dev.hirooka.webflux.http;
 
 
 import java.io.Serializable;

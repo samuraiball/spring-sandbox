@@ -1,5 +1,6 @@
 package dev.hirooka.r2dbcsample;
 
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -11,8 +12,10 @@ import reactor.core.publisher.Mono;
 public class CustomerHandler {
 
     private final CustomerRepository customerRepository;
+    private final R2dbcEntityTemplate template;
 
-    public CustomerHandler(CustomerRepository customerRepository) {
+    public CustomerHandler(CustomerRepository customerRepository, R2dbcEntityTemplate template) {
+        this.template = template;
         this.customerRepository = customerRepository;
     }
 
@@ -20,7 +23,7 @@ public class CustomerHandler {
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_NDJSON)
                 .body(customerRepository.findAll()
-                                .map(c -> new CustomerDto(c.getId(), c.getUserName())), CustomerDto.class);
+                        .map(c -> new CustomerDto(c.getId(), c.getUserName())), CustomerDto.class);
     }
 
     Mono<ServerResponse> find(ServerRequest request) {
