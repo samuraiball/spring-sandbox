@@ -2,6 +2,7 @@ package dev.hirooka.webflux;
 
 import dev.hirooka.webflux.http.ReactiveExampleHandler;
 import dev.hirooka.webflux.websocket.EchoHandler;
+import dev.hirooka.webflux.websocket.chat.ChatWebsocketConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +34,7 @@ public class WebfluxApplication {
     }
 
     @Bean
-    public HandlerMapping handlerMapping(EchoHandler handler) {
+    public HandlerMapping handlerMapping(EchoHandler handler, ChatWebsocketConfig chatHandler) {
         Map<String, WebSocketHandler> map = new HashMap<>();
         map.put("/ws/echo", handler);
         return new SimpleUrlHandlerMapping(map, 10);

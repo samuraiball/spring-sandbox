@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="messages"></div>
+<div>
+    <textarea name="message" id="message"></textarea>
+    <button id="send">send</button>
+</div>
+<script>
+    window.addEventListener('load', function(e){
+        const messages = document.getElementById('messages')
+        const message = document.getElementById('message')
+        const button = document.getElementById('send')
+        const websocket = new WebSocket('ws://localhost:8080/ws/chat')
+
+        websocket.addEventListener('message', function (e){
+            const element = document.createElement('div')
+            element.innerText = e.data
+            messages.appendChild(element)
+        })
+
+        function send(){
+            const value = message.value
+            message.value = ''
+            websocket.send(JSON.stringify({'text': value.trim()}))
+        }
+
+       message.addEventListener('keydown', function (e){
+           const key = e.key
+           if(key==='Enter'){
+               send();
+           }
+       })
+
+        button.addEventListener('click', function (e) {
+            send();
+            e.preventDefault()
+            return false
+        })
+
+
+    })
+
+</script>
+</body>
+</html>
