@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: spring-app
+  labels:
+    backend: spring-app
+spec:
+  selector:
+    matchLabels:
+      app: spring-app
+  podMetricsEndpoints:
+    - port: app-port
+    - path: /actuator/prometheus
