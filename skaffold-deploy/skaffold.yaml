@@ -1,0 +1,23 @@
+apiVersion: skaffold/v2beta20
+kind: Config
+metadata:
+  name: skaffold-deploy
+build:
+  artifacts:
+    - image: spring-app
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+deploy:
+  helm:
+    releases:
+      - name: spring-app
+        namespace: default
+        artifactOverrides:
+          image: spring-app
+        chartPath: helm
+        valuesFiles:
+          - "{{ .VALUES_FILE }}"
+portForward:
+- resourceType: service
+  resourceName: spring-app
+  port: 8081
